@@ -1,3 +1,4 @@
+import key
 import hashlib
 import hmac
 import base64
@@ -6,7 +7,7 @@ import scrypt
 import requests
 from json import dumps
 
-request = requests.get("https://hackattic.com/challenges/password_hashing/problem?access_token=b4116d855f2f8b1f")
+request = requests.get(f"https://hackattic.com/challenges/password_hashing/problem?access_token={key.key}")
 j = request.json()
 print(request.json())
 
@@ -39,5 +40,5 @@ data = dumps({'sha256': sha256,
 				'pbkdf2': pbkdf2,
 				'scrypt': scrypt})
 
-post = requests.post("https://hackattic.com/challenges/password_hashing/solve?access_token=b4116d855f2f8b1f", data = data)
+post = requests.post(f"https://hackattic.com/challenges/password_hashing/solve?access_token={key.key}", data = data)
 print(post.text)
