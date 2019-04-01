@@ -3,7 +3,8 @@ import hashlib
 import hmac
 import base64
 from binascii import hexlify
-import scrypt
+#import scrypt
+from pylibscrypt import scrypt
 import requests
 from json import dumps
 
@@ -28,7 +29,9 @@ N = j['scrypt']['N']
 r = j['scrypt']['r']
 p = j['scrypt']['p']
 buflen = j['scrypt']['buflen']
-scrypt = hexlify(scrypt.hash(password, salt, N, r, p, buflen)).decode('utf-8')
+# scrypt = hexlify(scrypt.hash(password, salt, N, r, p, buflen)).decode('utf-8')
+#scrypt = hexlify(scrypt(password, salt, N, r, p, buflen)).decode('utf-8')
+scrypt = input("Scrypt: ")
 
 print(f"Base SHA-256: {sha256}")
 print(f"HMAC-256: {hmac256}")
