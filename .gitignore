@@ -1,5 +1,10 @@
-#Ignore key file
+#Ignore generated files from problems
+priv_key.key
+required.txt
+*.sh
+*.pem
 key.py
+*.wav
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
