@@ -2,8 +2,9 @@
 priv_key.key
 required.txt
 *.sh
+*.der
 *.pem
-key.py
+store.py
 *.wav
 
 # Byte-compiled / optimized / DLL files

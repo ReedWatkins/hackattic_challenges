@@ -2,7 +2,7 @@ from struct import unpack
 from json import dumps
 import requests
 import base64
-import key
+import store
 
 '''
 	Order of pack needed to decode:
@@ -14,7 +14,7 @@ import key
 		double (big endian)
 '''
 
-request = requests.get(f"https://hackattic.com/challenges/help_me_unpack/problem?access_token={key.key}")
+request = requests.get(f"https://hackattic.com/challenges/help_me_unpack/problem?access_token={store.key}")
 j = request.json()
 requestBytes = base64.b64decode(j['bytes'])
 
@@ -33,6 +33,6 @@ data = dumps({'int': myint,
 		'big_endian_double': bige_double
 })
 
-p = requests.post(f"https://hackattic.com/challenges/help_me_unpack/solve?access_token={key.key}", data=data)
+p = requests.post(f"https://hackattic.com/challenges/help_me_unpack/solve?access_token={store.key}", data=data)
 
 print(p.text)
