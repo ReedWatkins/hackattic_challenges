@@ -3,7 +3,6 @@ from subprocess import run, PIPE
 import store
 
 def main():
-	# keys = Controller()
 
 	request = requests.get(f"https://hackattic.com/challenges/tales_of_ssl/problem?access_token={store.key}")
 
