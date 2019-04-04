@@ -26,15 +26,10 @@ def findDifficultyPrefix(difficulty: int) -> str:
 
 
 def main():
-	request = requests.get(f"https://hackattic.com/challenges/mini_miner/problem?access_token={store.key}")
-
-	request_json = request.json()
+	request_json = requests.get(f"https://hackattic.com/challenges/mini_miner/problem?access_token={store.key}").json()
 
 	difficulty = request_json['difficulty']
 	block_data = dumps(request_json['block']['data'], separators = (',', ':'))
-
-	print(difficulty)
-	print(block_data)
 	diffPrefix = findDifficultyPrefix(difficulty)
 
 	nonce = 0
@@ -49,14 +44,8 @@ def main():
 
 	send_request = requests.post(f"https://hackattic.com/challenges/mini_miner/solve?access_token={store.key}", data = data)
 
+	# Print response to see challenge was accepted
 	print(send_request.text)
-
-def test():
-
-	data = f'{{"data":[],"nonce":45}}'.encode('utf-8')
-	str_hash = hashlib.sha256(data).hexdigest()
-	print(str_hash)
 
 if __name__ == '__main__':
 	main()
-	# test()
