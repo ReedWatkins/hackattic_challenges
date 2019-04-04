@@ -1,11 +1,6 @@
 import requests
-# from pynput.keyboard import Key, Controller
 from subprocess import run, PIPE
 import store
-
-# def press_and_release_key(keyboard, key):
-# 	keyboard.press(key)
-# 	keyboard.release(key)
 
 def main():
 	# keys = Controller()
@@ -18,14 +13,7 @@ def main():
 	domain = j['required_data']['domain']
 	serial = j['required_data']['serial_number']
 	country = j['required_data']['country']
-
-	print(priv_key)
-	print(domain)
-	print(serial)
-	print(country)
-
 	countryCode = "".join([t[0] for t in country.split()])
-	print(countryCode)
 
 	with open('priv_key.key', 'w') as f:
 		f.write("-----BEGIN RSA PRIVATE KEY-----\n")
@@ -41,8 +29,6 @@ def main():
 		encoding = "ascii")
 
 	run(["./convertCert.sh"])
-
-	# run(["base64", "-w", "0", "cert.der", ">", "b64cert"])
 
 if __name__ == '__main__':
 	main()
