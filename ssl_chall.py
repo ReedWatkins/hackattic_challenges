@@ -42,7 +42,7 @@ def main():
 
 	run(["./convertCert.sh"])
 
-	run(["base64", "-w", "0", "cert.der", ">", "b64cert"])
+	# run(["base64", "-w", "0", "cert.der", ">", "b64cert"])
 
 if __name__ == '__main__':
 	main()
