@@ -1,7 +1,7 @@
 import requests
 import store
 import hashlib
-import math
+from math import floor
 from json import dumps
 
 def findDifficultyPrefix(difficulty: int) -> str:
@@ -12,7 +12,7 @@ def findDifficultyPrefix(difficulty: int) -> str:
 	lessThan4BitVals = ['7','3','1']
 
 	if tempDiff % 4 == 0:
-		diffStr+='0'*(math.floor(tempDiff/4))
+		diffStr+='0'*(floor(tempDiff/4))
 		return diffStr
 	else:
 		while tempDiff != 0:
