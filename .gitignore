@@ -6,6 +6,9 @@ required.txt
 *.pem
 store.py
 *.wav
+*.bin
+input
+redis.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
