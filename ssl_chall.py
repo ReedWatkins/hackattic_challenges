@@ -23,9 +23,10 @@ def main():
 		f.write("#!/bin/sh"+'\n\n')
 		f.write(f"openssl req -key priv_key.key -nodes -x509 -set_serial {serial} -out cert.pem")
 
-	run(["./openssl.sh"], stdout=PIPE, 
-		input = f"{countryCode}\n{country}\n\n\n\n{domain}\n\n",
-		encoding = "ascii")
+	run(["./openssl.sh"],
+	    stdout=PIPE, 
+	    input = f"{countryCode}\n{country}\n\n\n\n{domain}\n\n",
+	    encoding = "ascii")
 
 	run(["./convertCert.sh"])
 
