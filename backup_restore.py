@@ -1,14 +1,63 @@
 import requests
-import gzip
+from subprocess import run, PIPE, Popen
 import base64
 import store
+import psycopg2
+from json import dumps
 
-request = requests.get(f"https://hackattic.com/challenges/backup_restore/problem?access_token={store.key}")
+request = requests.get(f"https://hackattic.com/challenges/backup_restore/problem?access_token={store.key}").json()
 
-dump = request.json()["dump"]
-dumpDecode = base64.b64decode(dump)
+dump = request["dump"]
+binDump = base64.b64decode(dump)
 
-print(dumpDecode)
+with open('db.dump', 'wb') as fp:
+	fp.write(binDump)
 
-with open("db.dump", "wb") as f:
-	f.write(dumpDecode)
+"""
+Commands to convert b64dump to psql:
+-----------------------------------
+createdb testdb
+
+gunzip -c db.dump | psql testdb
+
+"""
+
+run(['createdb', 'testdb'])
+gunzip = Popen(['gunzip', '-c', 'db.dump'], stdout=PIPE)
+run(['psql', 'testdb'], stdin=gunzip.stdout)
+
+#psql command to get alive ssn's
+#SELECT ssn from criminal_records WHERE status='alive';
+
+try:
+	connect_str = f"dbname='testdb' user={store.dbuser} host='localhost' password={store.dbpass}"
+
+	conn = psycopg2.connect(connect_str)
+
+	cursor = conn.cursor()
+
+	cursor.execute("""SELECT ssn from criminal_records WHERE status='alive';""")
+
+	ssn = cursor.fetchall()
+	ssnList = []
+	for num in ssn:
+		ssnList.append(*num)
+
+	conn.commit()
+
+	conn.close()
+
+except Exception as e:
+	print(e)
+
+finally:
+	#Remove tempdb at the end of program
+	run(['dropdb', 'testdb'])
+
+	data = dumps({'alive_ssns': ssnList})
+
+	post_request = requests.post(f"https://hackattic.com/challenges/backup_restore/solve?access_token={store.key}", data = data)
+
+	print(post_request.text)
+
+
