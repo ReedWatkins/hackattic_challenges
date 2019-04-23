@@ -36,7 +36,7 @@ try:
 
 	cursor = conn.cursor()
 
-	cursor.execute("""SELECT ssn from criminal_records WHERE status='alive';""")
+	cursor.execute(f"{store.command}")
 
 	ssn = cursor.fetchall()
 	ssnList = []
