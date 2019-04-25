@@ -26,9 +26,6 @@ run(['createdb', 'testdb'])
 gunzip = Popen(['gunzip', '-c', 'db.dump'], stdout=PIPE)
 run(['psql', 'testdb'], stdin=gunzip.stdout)
 
-#psql command to get alive ssn's
-#SELECT ssn from criminal_records WHERE status='alive';
-
 try:
 	connect_str = f"dbname='testdb' user={store.dbuser} host='localhost' password={store.dbpass}"
 
