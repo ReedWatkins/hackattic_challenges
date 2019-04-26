@@ -13,7 +13,7 @@ My own solutions to the challenges found on hackattic.
 - [ ] [Basic face detection](https://hackattic.com/challenges/basic_face_detection)
 - [ ] [The one with Redis](https://hackattic.com/challenges/the_one_redis)
 - [ ] [Visual basic Math](https://hackattic.com/challenges/visual_basic_math)
-- [ ] [A global presence](https://hackattic.com/challenges/a_global_presence)
+- [x] [A global presence](https://hackattic.com/challenges/a_global_presence)
 - [x] [WebSocket chit chat](https://hackattic.com/challenges/websocket_chit_chat)
 - [x] [Collision course](https://hackattic.com/challenges/collision_course)
 - [ ] [Hosting git](https://hackattic.com/challenges/hosting_git)

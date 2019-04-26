@@ -9,6 +9,7 @@ store.py
 *.bin
 input
 redis.txt
+proxyTest.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
