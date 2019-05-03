@@ -43,6 +43,12 @@ try:
 	conn.commit()
 
 	conn.close()
+	
+	data = dumps({'alive_ssns': ssnList})
+
+	post_request = requests.post(f"https://hackattic.com/challenges/backup_restore/solve?access_token={store.key}", data = data)
+
+	print(post_request.text)
 
 except Exception as e:
 	print(e)
@@ -50,11 +56,3 @@ except Exception as e:
 finally:
 	#Remove tempdb at the end of program
 	run(['dropdb', 'testdb'])
-
-	data = dumps({'alive_ssns': ssnList})
-
-	post_request = requests.post(f"https://hackattic.com/challenges/backup_restore/solve?access_token={store.key}", data = data)
-
-	print(post_request.text)
-
-
