@@ -20,7 +20,6 @@ async def ping_response(token):
 			message = await socket.recv()
 			print(message)
 			if message == 'ping!':
-				temp_time = start_time
 				ping_timer = time.time()
 				duration = ping_timer - start_time
 				time_btw_msg = str(int(round(duration*1000, -2)))
